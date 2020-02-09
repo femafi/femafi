@@ -5,7 +5,7 @@ import HeadingAndText from '../slices/HeadingAndText';
 import WallsIO from '../slices/WallsIO';
 
 interface SliceZoneProps {
-  slices: PrismicSlice<any>[];
+  slices?: PrismicSlice<any>[];
 }
 
 export default class SliceZone extends React.Component<SliceZoneProps> {
@@ -28,6 +28,10 @@ export default class SliceZone extends React.Component<SliceZoneProps> {
 
   public render() {
     const { slices } = this.props;
+
+    if (!slices) {
+      return null;
+    }
 
     return (
       <React.Fragment>
