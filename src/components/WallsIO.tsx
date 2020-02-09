@@ -14,7 +14,7 @@ interface WallsIOProps {
 }
 
 const WallsIO = React.forwardRef<HTMLDivElement, WallsIOProps>((props, ref) => {
-  if (!ref || !('current' in ref)) {
+  if (!ref || !('current' in ref) || typeof window === 'undefined') {
     return null;
   }
 
