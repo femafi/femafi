@@ -36,10 +36,7 @@ export const query = graphql`
 `;
 
 interface PageProps {
-  data: PrismicDocumentByUid<{ page: PageDocument }>,
-  pageContext?: {
-    wallsIo?: string;
-  }
+  data: PrismicDocumentByUid<{ page: PageDocument }>
 }
 
 const Page: QueryComponent<PageProps> = props => {
