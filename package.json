@@ -9,6 +9,7 @@
     "clean": "rimraf .cache public",
     "prebuild": "npm run clean",
     "build": "gatsby build",
+    "build:dev": "dotenv gatsby build",
     "predevelop": "npm run clean",
     "develop": "dotenv gatsby develop",
     "postinstall": "npm run remove-styled-components-stupid-dependency",
