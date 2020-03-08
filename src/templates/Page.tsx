@@ -42,10 +42,12 @@ interface PageProps {
 const Page: QueryComponent<PageProps> = props => {
   const page = oc(props).data.prismic.page();
   const title = oc(page).title();
+  const description = oc(page).description();
+  const image = oc(page).image();
   const slices = oc(page).body();
 
   return (
-    <Layout>
+    <Layout title={title} description={description} image={image}>
       <Wrapper>
         <Title>{title}</Title>
         <SliceZone slices={slices} />

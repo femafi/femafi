@@ -3,7 +3,9 @@ import styled, { createGlobalStyle, keyframes, ThemeProvider } from 'styled-comp
 import styledNormalize from 'styled-normalize';
 import fonts from '../fonts';
 import theme, { Theme } from '../theme';
+import { PrismicKeyText, PrismicImage } from '../prismic';
 import Logo from '../assets/logo.svg';
+import SEO from './SEO';
 
 const GlobalStyle = createGlobalStyle`
   ${styledNormalize}
@@ -84,22 +86,33 @@ const ContentWrapper = styled.div`
   margin: 0 auto;
 `;
 
-export const Layout: React.FunctionComponent = props => (
-  <ThemeProvider theme={theme}>
-    <GlobalStyle />
-    <Center>
-      <StyledLogo />
-    </Center>
-    <LinesWrapper>
-      <Line color={theme.colors.accentLight} />
-      <Line color={theme.colors.mainLight} />
-      <Line color={theme.colors.mainDark} />
-    </LinesWrapper>
-    <Center>
-      <Title>Finnish Electronic Music Foundation</Title>
-    </Center>
-    <ContentWrapper {...props} />
-  </ThemeProvider>
+interface LayoutProps {
+  title?: PrismicKeyText;
+  description?: PrismicKeyText;
+  image?: PrismicImage;
+}
+
+export const Layout: React.FunctionComponent<LayoutProps> = ({ title, description, image, children }) => (
+  <>
+    <SEO title={title} description={description} image={image} />
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Center>
+        <StyledLogo />
+      </Center>
+      <LinesWrapper>
+        <Line color={theme.colors.accentLight} />
+        <Line color={theme.colors.mainLight} />
+        <Line color={theme.colors.mainDark} />
+      </LinesWrapper>
+      <Center>
+        <Title>Finnish Electronic Music Foundation</Title>
+      </Center>
+      <ContentWrapper>
+        {children}
+      </ContentWrapper>
+    </ThemeProvider>
+  </>
 );
 
 export default Layout;

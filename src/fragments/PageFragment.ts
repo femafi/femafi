@@ -1,5 +1,5 @@
 import { graphql } from 'gatsby';
-import { PrismicDocumentBase, PrismicKeyText } from '../prismic';
+import { PrismicDocumentBase, PrismicKeyText, PrismicImage } from '../prismic';
 import { HeadingAndTextSlice } from '../slices/HeadingAndText';
 import { WallsIOSlice } from '../slices/WallsIO';
 
@@ -7,6 +7,8 @@ export type PageSlice = HeadingAndTextSlice | WallsIOSlice;
 
 export interface PageDocument extends PrismicDocumentBase {
   title: PrismicKeyText;
+  description?: PrismicKeyText;
+  image?: PrismicImage;
   body: PageSlice[];
 }
 
@@ -20,6 +22,8 @@ export const PageFragment = graphql`
       uid
     }
     title
+    description
+    image
     body {
       __typename
       ... on PRISMIC_PageBodyHeading_and_text {

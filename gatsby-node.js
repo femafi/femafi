@@ -16,15 +16,21 @@ exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
     }
   };
 
-  // Exclude all node_modules from transpilation,
-  // except for 'gatsby-source-prismic-graphql', 'gatsby-source-graphql-universal' and 'ts-optchain'
-  const newJSXRule = {
-    ...loaders.js(),
-    test: /\.jsx?$/,
-    exclude: testModulePath
-  };
+  const rules = config.module.rules.map(rule => {
+    // Exclude all node_modules from transpilation,
+    // except for 'gatsby-source-prismic-graphql', 'gatsby-source-graphql-universal' and 'ts-optchain'
+    if (String(rule.test) === String(/\.(js|mjs|jsx)$/)) {
+      return { ...rule, exclude: testModulePath };
+    }
 
-  const rulesWithoutJSX = config.module.rules.filter(rule => String(rule.test) !== String(/\.jsx?$/));
-  config.module.rules = [fontsRule, ...rulesWithoutJSX, newJSXRule];
+    // Force images not to be base64 encoded
+    if (String(rule.test) === String(/\.(ico|svg|jpg|jpeg|png|gif|webp)(\?.*)?$/)) {
+      return { ...rule, use: ['file-loader'] };
+    }
+
+    return rule;
+  });
+
+  config.module.rules = [fontsRule, ...rules];
   actions.replaceWebpackConfig(config);
 };

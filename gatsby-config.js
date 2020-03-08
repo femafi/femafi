@@ -15,10 +15,12 @@ if (!PRISMIC_ACCESS_TOKEN) {
 
 module.exports = {
   siteMetadata: {
-    siteName: `FEMA`,
-    exampleUrl: `https://fema.fi`,
+    title: 'Finnish Electronic Music Association',
+    description: '',
+    url: 'https://fema.fi',
   },
   plugins: [
+    'gatsby-plugin-react-helmet',
     'gatsby-plugin-typescript',
     'gatsby-plugin-typescript-checker',
     {
