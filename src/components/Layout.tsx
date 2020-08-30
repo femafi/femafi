@@ -94,6 +94,7 @@ interface LayoutProps {
 
 export const Layout: React.FunctionComponent<LayoutProps> = ({ title, description, image, children }) => (
   <>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&amp;display=swap" rel="stylesheet" />
     <SEO title={title} description={description} image={image} />
     <ThemeProvider theme={theme}>
       <GlobalStyle />

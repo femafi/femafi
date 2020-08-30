@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { createRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import useRect from '../hooks/useRect';
-import useWindowDimensions from '../hooks/useWindowDimensions';
+import { useWindowSize } from '@react-hook/window-size';
 import { PrismicDocumentBase, PrismicSlice, PrismicKeyText, PrismicRichText, PrismicWebLink } from '../prismic';
 
 interface WallsIONonRepeatable {
@@ -16,26 +15,29 @@ const IFrame = styled.iframe<{ height: number }>`
   border: 1px solid red;
 `;
 
-const WallsIO = React.forwardRef<HTMLDivElement, WallsIONonRepeatable>((props, ref) => {
+const WallsIO: React.FC<WallsIONonRepeatable> = (props) => {
   const { src } = props;
+  const [top, setTop] = useState(0);
+  const ref = createRef<HTMLDivElement>();
+  const [width, height] = useWindowSize();
 
-  if (!ref || !('current' in ref)) {
-    return null;
-  }
 
   if (src._linkType !== 'Link.web') {
     throw new Error('Walls.io link must be external link');
   }
 
-  const { height } = useWindowDimensions();
-  const { top } = useRect(ref);
-  const iframeHeight = Math.floor(height - top - 32);
+  useEffect(() => {
+    if (ref && ref.current) {
+      const rect = ref.current.getBoundingClientRect();
+      setTop(rect.top);
+    }
+  }, [height, ref, setTop, width]);
 
   return (
     <div ref={ref}>
-      <IFrame height={iframeHeight} src={src.url} />
+      <IFrame height={Math.floor(height - top - 32)} src={src.url} />
     </div>
   );
-});
+};
 
 export default WallsIO;

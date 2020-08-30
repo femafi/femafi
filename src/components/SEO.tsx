@@ -23,7 +23,7 @@ interface SEOQuery {
   }
 }
 
-const SEO: React.FunctionComponent<SEOProps & SEOQuery> = props => {
+const SEO: React.FunctionComponent<SEOProps & SEOQuery> = (props) => {
   const defaultTitle = oc(props).data.siteMetadata.title();
   const defaultDescription = oc(props).data.siteMetadata.description();
   const siteUrl = oc(props).data.siteMetadata.url();

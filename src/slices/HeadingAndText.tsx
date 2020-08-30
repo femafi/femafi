@@ -17,7 +17,7 @@ interface HeadingAndTextNonRepeatable {
 
 export type HeadingAndTextSlice = PrismicSlice<HeadingAndTextNonRepeatable, null, 'headinge_and_text'>;
 
-const HeadingAndText: React.FunctionComponent<HeadingAndTextNonRepeatable> = props => {
+const HeadingAndText: React.FunctionComponent<HeadingAndTextNonRepeatable> = (props) => {
   const heading = oc(props).heading();
   const text = oc(props).text();
 
