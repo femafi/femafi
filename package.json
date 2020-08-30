@@ -17,6 +17,7 @@
     "start": "gatsby serve",
     "preserve:dev": "npm run build:dev",
     "serve:dev": "dotenv gatsby serve",
+    "preinstall": "npx npm-force-resolutions",
     "postinstall": "npm run remove-styled-components-stupid-dependency",
     "lint": "tslint -c tslint.json \"src/**/*.{ts,tsx}\""
   },
@@ -62,5 +63,8 @@
     "tslint-loader": "^3.5.4",
     "tslint-react": "^5.0.0",
     "typescript": "^4.0.2"
+  },
+  "resolutions": {
+    "gatsby-source-graphql-universal": "3.3.0"
   }
 }
