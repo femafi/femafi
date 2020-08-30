@@ -15,8 +15,7 @@ const IFrame = styled.iframe<{ height: number }>`
   border: 1px solid red;
 `;
 
-const WallsIO: React.FC<WallsIONonRepeatable> = (props) => {
-  const { src } = props;
+const WallsIO: React.FC<WallsIONonRepeatable> = ({ src }) => {
   const [top, setTop] = useState(0);
   const ref = createRef<HTMLDivElement>();
   const [width, height] = useWindowSize();

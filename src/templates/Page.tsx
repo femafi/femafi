@@ -1,7 +1,8 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import { oc } from 'ts-optchain';
 import styled from 'styled-components';
+import get from 'lodash/get';
+
 import { Theme } from '../theme';
 import Layout from '../components/Layout';
 import { PrismicDocumentByUid } from '../prismic';
@@ -40,11 +41,11 @@ interface PageProps {
 }
 
 const Page: QueryComponent<PageProps> = props => {
-  const page = oc(props).data.prismic.page();
-  const title = oc(page).title();
-  const description = oc(page).description();
-  const image = oc(page).image();
-  const slices = oc(page).body();
+  const page = get(props.data.prismic, 'page');
+  const title = get(page, 'title');
+  const description = get(page, 'description');
+  const image = get(page, 'image');
+  const slices = get(page, 'body');
 
   return (
     <Layout title={title} description={description} image={image}>

@@ -23,12 +23,6 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-typescript',
     'gatsby-plugin-typescript-checker',
-    {
-      resolve:'gatsby-plugin-tslint',
-      options: {
-        stages: ['develop']
-      }
-    },
     'gatsby-plugin-styled-components',
     {
       resolve: 'gatsby-source-prismic-graphql',

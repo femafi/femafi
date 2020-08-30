@@ -1,7 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { oc } from 'ts-optchain';
 import { StaticQuery, graphql } from 'gatsby';
+import get from 'lodash/get';
+
 import { PrismicImage } from '../prismic';
 import defaultImage from './logo.png';
 
@@ -24,29 +25,33 @@ interface SEOQuery {
 }
 
 const SEO: React.FunctionComponent<SEOProps & SEOQuery> = (props) => {
-  const defaultTitle = oc(props).data.siteMetadata.title();
-  const defaultDescription = oc(props).data.siteMetadata.description();
-  const siteUrl = oc(props).data.siteMetadata.url();
-  const pathname = oc(props).pathname();
+  const siteMetadata = get(props.data, 'siteMetadata');
+  const defaultTitle = get(siteMetadata, 'title');
+  const defaultDescription = get(siteMetadata, 'description');
+  const siteUrl = get(siteMetadata, 'url');
 
-  const title = oc(props).title(defaultTitle);
-  const description = oc(props).description(defaultDescription);
+  const {
+    description = defaultDescription,
+    image = defaultImage,
+    pathname,
+    title = defaultTitle,
+  } = props;
+
   const url = `${siteUrl}${pathname || '/'}`;
-  const image = oc(props).image.url(defaultImage);
 
   return (
     <>
-      <Helmet title={title}>
+      <Helmet title={title || defaultTitle}>
         <meta name="description" content={description} />
         <meta name="image" content={image} />
-        <meta property="og:title" content={title} />
+        <meta property="og:title" content={title || defaultTitle} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={url} />
-        <meta property="og:image" content={image} />}
+        <meta property="og:image" content={image} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title} />
+        <meta name="twitter:title" content={title || defaultTitle} />
         <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={image} />}
+        <meta name="twitter:image" content={image} />
       </Helmet>
     </>
   );

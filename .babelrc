@@ -1,7 +1,0 @@
-{
-  "babel": {
-    "presets": [
-      "babel-preset-gatsby"
-    ]
-  }
-}

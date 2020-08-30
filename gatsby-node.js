@@ -1,6 +1,6 @@
 const testModulePath = modulePath => {
   return /node_modules/.test(modulePath) &&
-    !/node_modules\/(gatsby-source-prismic-graphql|gatsby-source-graphql-universal|ts-optchain)/.test(modulePath);
+    !/node_modules\/(gatsby-source-prismic-graphql|gatsby-source-graphql-universal)/.test(modulePath);
 };
 
 exports.createPages = require('./src/utils/createPages');
