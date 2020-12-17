@@ -18,26 +18,25 @@ interface SEOQuery {
       title: string;
       description: string;
       url: string;
-    }
-  }
+    };
+  };
 }
 
 const SEO: React.FunctionComponent<SEOProps & SEOQuery> = (props) => {
   const {
+    data,
     description: customDescription,
+    image: customImage,
     pathname,
     title: customTitle,
   } = props;
 
-  const {
-    title: defaultTitle,
-    description: defaultDescription,
-    url: siteUrl,
-  } = props.data.siteMetadata || {};
+  const { title: defaultTitle, description: defaultDescription, url: siteUrl } =
+    data.siteMetadata || {};
 
   const title = customTitle || defaultTitle;
-  const description = customDescription || defaultDescription;
-  const image = props.image ? props.image.url : defaultImage;
+  const description = customDescription || defaultDescription;
+  const image = customImage ? customImage.url : defaultImage;
   const url = `${siteUrl}${pathname || '/'}`;
 
   return (
@@ -56,7 +55,7 @@ const SEO: React.FunctionComponent<SEOProps & SEOQuery> = (props) => {
       </Helmet>
     </>
   );
-}
+};
 
 const query = graphql`
   query SEO {
@@ -71,8 +70,11 @@ const query = graphql`
 `;
 
 const SEOQueryComponent: React.FunctionComponent<SEOProps> = (props) => (
-  // tslint:disable-next-line:jsx-no-lambda
-  <StaticQuery query={query} render={data => <SEO data={data} {...props} />} />
+  <StaticQuery
+    query={query}
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    render={(data) => <SEO data={data} {...props} />}
+  />
 );
 
 export default SEOQueryComponent;

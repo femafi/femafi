@@ -9,8 +9,10 @@ const getWindowDimensions = () => {
   return { height: 0, width: 0 };
 };
 
-const useWindowDimensions = () => {
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+const useWindowDimensions = (): { width: number; height: number } => {
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
 
   useEffect(() => {
     const handleResize = () => {

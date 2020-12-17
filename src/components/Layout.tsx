@@ -1,5 +1,9 @@
 import React from 'react';
-import styled, { createGlobalStyle, keyframes, ThemeProvider } from 'styled-components';
+import styled, {
+  createGlobalStyle,
+  keyframes,
+  ThemeProvider,
+} from 'styled-components';
 import styledNormalize from 'styled-normalize';
 import fonts from '../fonts';
 import theme, { Theme } from '../theme';
@@ -49,8 +53,8 @@ const Center = styled.div`
 const StyledLogo = styled(Logo)<{ theme: Theme }>`
   display: inline-block;
   width: 240px;
-  fill: ${props => props.theme.colors.mainLight};
-  filter: drop-shadow(13px 0 ${props => props.theme.colors.accentDark});
+  fill: ${(props) => props.theme.colors.mainLight};
+  filter: drop-shadow(13px 0 ${(props) => props.theme.colors.accentDark});
 `;
 
 const swipeFromLeft = keyframes`
@@ -60,11 +64,11 @@ const swipeFromLeft = keyframes`
 
 const LinesWrapper = styled.div`
   margin-top: -12px;
-  animation: ${swipeFromLeft} .7s ease-in 1;
+  animation: ${swipeFromLeft} 0.7s ease-in 1;
 `;
 
 const Line = styled.div<{ color: string }>`
-  background-color: ${props => props.color};
+  background-color: ${(props) => props.color};
   height: 5px;
 `;
 
@@ -78,11 +82,11 @@ const Title = styled.h1`
   font-weight: 300;
   margin-top: 2px;
   animation: ${fadeIn} 1.4s ease-in 1;
-`
+`;
 
 const ContentWrapper = styled.div`
   width: 100%;
-  max-width: ${props => props.theme.maxWidth};
+  max-width: ${(props) => props.theme.maxWidth};
   margin: 0 auto;
 `;
 
@@ -92,7 +96,12 @@ interface LayoutProps {
   image?: PrismicImage;
 }
 
-export const Layout: React.FunctionComponent<LayoutProps> = ({ title, description, image, children }) => (
+export const Layout: React.FunctionComponent<LayoutProps> = ({
+  title,
+  description,
+  image,
+  children,
+}) => (
   <>
     <SEO title={title} description={description} image={image} />
     <ThemeProvider theme={theme}>
@@ -108,9 +117,7 @@ export const Layout: React.FunctionComponent<LayoutProps> = ({ title, descriptio
       <Center>
         <Title>Finnish Electronic Music Foundation</Title>
       </Center>
-      <ContentWrapper>
-        {children}
-      </ContentWrapper>
+      <ContentWrapper>{children}</ContentWrapper>
     </ThemeProvider>
   </>
 );

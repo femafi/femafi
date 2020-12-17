@@ -8,11 +8,13 @@ const getRect = <T extends HTMLElement>(element?: T): DOMRect => {
     height: 0,
     left: 0,
     right: 0,
-    toJSON: () => { /* empty */ },
+    toJSON: () => {
+      /* empty */
+    },
     top: 0,
     width: 0,
     x: 0,
-    y: 0
+    y: 0,
   };
 
   if (element) {
@@ -23,7 +25,9 @@ const getRect = <T extends HTMLElement>(element?: T): DOMRect => {
 };
 
 const useRect = <T extends HTMLElement>(ref: React.RefObject<T>): DOMRect => {
-  const [rect, setRect] = useState<DOMRect>(ref && ref.current ? getRect(ref.current) : getRect());
+  const [rect, setRect] = useState<DOMRect>(
+    ref && ref.current ? getRect(ref.current) : getRect()
+  );
 
   const handleResize = useCallback(() => {
     if (!ref.current) {
@@ -40,16 +44,14 @@ const useRect = <T extends HTMLElement>(ref: React.RefObject<T>): DOMRect => {
 
     handleResize();
 
-    let resizeObserver = new ResizeObserver(() => handleResize());
+    const resizeObserver = new ResizeObserver(() => handleResize());
     resizeObserver.observe(element);
+
+    // eslint-disable-next-line consistent-return
     return () => {
-      if (!resizeObserver) {
-        return;
-      }
-      resizeObserver.disconnect();
-      resizeObserver = null;
+      resizeObserver?.disconnect();
     };
-  }, [ref.current]);
+  }, [handleResize, ref]);
 
   return rect;
 };

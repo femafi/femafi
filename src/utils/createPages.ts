@@ -23,7 +23,10 @@ interface BoundActionCreators {
 
 type GraphQL = (query: string, options?: any) => Promise<any>;
 
-type GatsbyCreatePages = (fns: { graphql: GraphQL, boundActionCreators: BoundActionCreators }) => void;
+type GatsbyCreatePages = (fns: {
+  graphql: GraphQL;
+  boundActionCreators: BoundActionCreators;
+}) => void;
 
 interface PageInfo {
   endCursor: string;
@@ -64,30 +67,37 @@ const query = `
   }
 `;
 
-const createPages: GatsbyCreatePages = async ({ graphql, boundActionCreators }) => {
+const createPages: GatsbyCreatePages = async ({
+  graphql,
+  boundActionCreators,
+}) => {
   const { createPage, createRedirect } = boundActionCreators;
 
   let hasNextPage: boolean | undefined = true;
   let endCursor = null;
   while (hasNextPage) {
+    // eslint-disable-next-line no-await-in-loop
     const response: QueryData = await graphql(query, { after: endCursor });
     const { edges, pageInfo } = response.data.prismic.allPages;
     hasNextPage = pageInfo.hasNextPage;
     endCursor = pageInfo.endCursor;
 
     if (!edges) {
-        throw new Error(`Edges are missing from graphql query`);
+      throw new Error(`Edges are missing from graphql query`);
     }
 
-    await Promise.all(edges.map(async ({ node }) => {
-      const { uid } = node._meta;
-      await createPage({
-        path: linkResolver(node),
-        component: path.resolve('src/templates/Page.tsx'),
-        context: { uid }
+    // eslint-disable-next-line no-await-in-loop
+    await Promise.all(
+      edges.map(async ({ node }) => {
+        const { uid } = node._meta;
+        await createPage({
+          path: linkResolver(node),
+          component: path.resolve('src/templates/Page.tsx'),
+          context: { uid },
+        });
       })
-    }));
+    );
   }
-}
+};
 
 module.exports = createPages;

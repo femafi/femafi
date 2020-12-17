@@ -15,9 +15,9 @@ const Wrapper = styled.div<{ theme: Theme }>`
 const Title = styled.h1<{ theme: Theme }>`
   display: inline-block;
   color: $white;
-  text-shadow: 1px 1px 2px ${props => props.theme.colors.shadow};
+  text-shadow: 1px 1px 2px ${(props) => props.theme.colors.shadow};
   font-weight: 300;
-  background-color: ${props => props.theme.colors.mainLight};
+  background-color: ${(props) => props.theme.colors.mainLight};
   border-radius: 0.5rem;
   font-size: 1.5rem;
   margin: 0;
@@ -35,16 +35,11 @@ export const query = graphql`
 `;
 
 interface PageProps {
-  data: PrismicDocumentByUid<{ page: PageDocument }>
+  data: PrismicDocumentByUid<{ page: PageDocument }>;
 }
 
-const Page: QueryComponent<PageProps> = (props) => {
-  const {
-    body: slices,
-    description,
-    image,
-    title,
-  } = props.data.prismic.page;
+const Page: QueryComponent<PageProps> = ({ data }) => {
+  const { body: slices, description, image, title } = data.prismic.page;
 
   return (
     <Layout title={title} description={description} image={image}>

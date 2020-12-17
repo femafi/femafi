@@ -1,23 +1,32 @@
 import { RichText } from 'prismic-reactjs';
 import React from 'react';
 import styled from 'styled-components';
-import { PrismicDocumentBase, PrismicSlice, PrismicKeyText, PrismicRichText } from '../prismic';
+import {
+  PrismicDocumentBase,
+  PrismicSlice,
+  PrismicKeyText,
+  PrismicRichText,
+} from '../prismic';
 
-const Heading = styled.h2`
-`;
+const Heading = styled.h2``;
 
-const Text = styled.div`
-`;
+const Text = styled.div``;
 
 interface HeadingAndTextNonRepeatable {
   heading: PrismicKeyText;
   text: PrismicRichText;
 }
 
-export type HeadingAndTextSlice = PrismicSlice<HeadingAndTextNonRepeatable, null, 'headinge_and_text'>;
+export type HeadingAndTextSlice = PrismicSlice<
+  HeadingAndTextNonRepeatable,
+  null,
+  'headinge_and_text'
+>;
 
-const HeadingAndText: React.FunctionComponent<HeadingAndTextNonRepeatable> = (props) => {
-  const { heading, text } = props;
+const HeadingAndText: React.FunctionComponent<HeadingAndTextNonRepeatable> = (
+  props
+) => {
+  const { heading, text } = props;
 
   if (!heading) {
     throw new Error('No heading');
@@ -32,7 +41,7 @@ const HeadingAndText: React.FunctionComponent<HeadingAndTextNonRepeatable> = (pr
       <Heading>{heading}</Heading>
       <Text>{RichText.render(text)}</Text>
     </>
-  )
+  );
 };
 
 export default HeadingAndText;
