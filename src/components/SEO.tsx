@@ -1,6 +1,5 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { oc } from 'ts-optchain';
 import { StaticQuery, graphql } from 'gatsby';
 import { PrismicImage } from '../prismic';
 import defaultImage from './logo.png';
@@ -23,16 +22,23 @@ interface SEOQuery {
   }
 }
 
-const SEO: React.FunctionComponent<SEOProps & SEOQuery> = props => {
-  const defaultTitle = oc(props).data.siteMetadata.title();
-  const defaultDescription = oc(props).data.siteMetadata.description();
-  const siteUrl = oc(props).data.siteMetadata.url();
-  const pathname = oc(props).pathname();
+const SEO: React.FunctionComponent<SEOProps & SEOQuery> = (props) => {
+  const {
+    description: customDescription,
+    pathname,
+    title: customTitle,
+  } = props;
 
-  const title = oc(props).title(defaultTitle);
-  const description = oc(props).description(defaultDescription);
+  const {
+    title: defaultTitle,
+    description: defaultDescription,
+    url: siteUrl,
+  } = props.data.siteMetadata || {};
+
+  const title = customTitle || defaultTitle;
+  const description = customDescription || defaultDescription;
+  const image = props.image ? props.image.url : defaultImage;
   const url = `${siteUrl}${pathname || '/'}`;
-  const image = oc(props).image.url(defaultImage);
 
   return (
     <>
@@ -42,11 +48,11 @@ const SEO: React.FunctionComponent<SEOProps & SEOQuery> = props => {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={url} />
-        <meta property="og:image" content={image} />}
+        <meta property="og:image" content={image} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={image} />}
+        <meta name="twitter:image" content={image} />
       </Helmet>
     </>
   );
@@ -64,7 +70,7 @@ const query = graphql`
   }
 `;
 
-const SEOQueryComponent: React.FunctionComponent<SEOProps> = props => (
+const SEOQueryComponent: React.FunctionComponent<SEOProps> = (props) => (
   // tslint:disable-next-line:jsx-no-lambda
   <StaticQuery query={query} render={data => <SEO data={data} {...props} />} />
 );

@@ -1,5 +1,4 @@
 import path from 'path';
-import { oc } from 'ts-optchain';
 import { PrismicNode, PrismicDocumentBase } from '../prismic';
 import { PageDocument, PageFragment } from '../fragments/PageFragment';
 import linkResolver from './linkResolver';
@@ -72,17 +71,16 @@ const createPages: GatsbyCreatePages = async ({ graphql, boundActionCreators }) 
   let endCursor = null;
   while (hasNextPage) {
     const response: QueryData = await graphql(query, { after: endCursor });
-    const edges = oc(response).data.prismic.allPages.edges();
-    endCursor = oc(response).data.prismic.allPages.pageInfo.endCursor();
-    hasNextPage = oc(response).data.prismic.allPages.pageInfo.hasNextPage();
+    const { edges, pageInfo } = response.data.prismic.allPages;
+    hasNextPage = pageInfo.hasNextPage;
+    endCursor = pageInfo.endCursor;
 
     if (!edges) {
         throw new Error(`Edges are missing from graphql query`);
     }
 
-    await Promise.all(edges.map(async edge => {
-      const node = oc(edge).node();
-      const uid = oc(node)._meta.uid();
+    await Promise.all(edges.map(async ({ node }) => {
+      const { uid } = node._meta;
       await createPage({
         path: linkResolver(node),
         component: path.resolve('src/templates/Page.tsx'),

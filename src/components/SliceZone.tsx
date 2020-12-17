@@ -1,5 +1,4 @@
 import React from 'react';
-import { oc } from 'ts-optchain';
 import { PrismicSlice } from '../prismic';
 import HeadingAndText from '../slices/HeadingAndText';
 import WallsIO from '../slices/WallsIO';

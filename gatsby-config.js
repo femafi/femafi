@@ -31,7 +31,7 @@ module.exports = {
     },
     'gatsby-plugin-styled-components',
     {
-      resolve: 'gatsby-source-prismic-graphql',
+      resolve: '@prismicio/gatsby-source-prismic-graphql',
       options: {
         repositoryName: PRISMIC_REPOSITORY_NAME,
         defaultLang: PRISMIC_DEFAULT_LANG || 'en-gb',

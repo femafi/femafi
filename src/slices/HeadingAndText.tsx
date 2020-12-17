@@ -1,7 +1,6 @@
 import { RichText } from 'prismic-reactjs';
 import React from 'react';
 import styled from 'styled-components';
-import { oc } from 'ts-optchain';
 import { PrismicDocumentBase, PrismicSlice, PrismicKeyText, PrismicRichText } from '../prismic';
 
 const Heading = styled.h2`
@@ -17,9 +16,8 @@ interface HeadingAndTextNonRepeatable {
 
 export type HeadingAndTextSlice = PrismicSlice<HeadingAndTextNonRepeatable, null, 'headinge_and_text'>;
 
-const HeadingAndText: React.FunctionComponent<HeadingAndTextNonRepeatable> = props => {
-  const heading = oc(props).heading();
-  const text = oc(props).text();
+const HeadingAndText: React.FunctionComponent<HeadingAndTextNonRepeatable> = (props) => {
+  const { heading, text } = props;
 
   if (!heading) {
     throw new Error('No heading');
