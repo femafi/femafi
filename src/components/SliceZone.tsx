@@ -1,6 +1,6 @@
 import React from 'react';
 import { PrismicSlice } from '../prismic';
-import HeadingAndText from '../slices/HeadingAndText';
+import HeadingWithTextAndImage from '../slices/HeadingWithTextAndImage';
 import WallsIO from '../slices/WallsIO';
 
 interface SliceZoneProps {
@@ -15,16 +15,14 @@ export default class SliceZone extends React.Component<SliceZoneProps> {
     const { type, primary } = slice;
     const key = `slice-${type}-${index}`;
     switch (type) {
-      case 'heading_and_text': {
+      case 'heading_with_text_and_image': {
         // eslint-disable-next-line react/jsx-props-no-spreading
-        return <HeadingAndText key={key} {...primary} />;
-        break;
+        return <HeadingWithTextAndImage key={key} {...primary} />;
       }
       case 'wallsio': {
         const ref = React.createRef<HTMLDivElement>();
         // eslint-disable-next-line react/jsx-props-no-spreading
         return <WallsIO ref={ref} key={key} {...primary} />;
-        break;
       }
       default:
         throw new Error(`Cannot handle slice type: "${type}"`);

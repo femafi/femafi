@@ -2,13 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import useRect from '../hooks/useRect';
 import useWindowDimensions from '../hooks/useWindowDimensions';
-import {
-  PrismicDocumentBase,
-  PrismicSlice,
-  PrismicKeyText,
-  PrismicRichText,
-  PrismicWebLink,
-} from '../prismic';
+import { PrismicSlice, PrismicWebLink } from '../prismic';
 
 interface WallsIONonRepeatable {
   src: PrismicWebLink;

@@ -2,7 +2,7 @@ import { RichText } from 'prismic-reactjs';
 import React from 'react';
 import styled from 'styled-components';
 import {
-  PrismicDocumentBase,
+  PrismicImage,
   PrismicSlice,
   PrismicKeyText,
   PrismicRichText,
@@ -12,21 +12,27 @@ const Heading = styled.h2``;
 
 const Text = styled.div``;
 
-interface HeadingAndTextNonRepeatable {
+const Image =styled.img`
+  width: 100%;
+  height: auto;
+`;
+
+interface HeadingWithTextAndImageNonRepeatable {
   heading: PrismicKeyText;
+  image1: PrismicImage;
   text: PrismicRichText;
 }
 
-export type HeadingAndTextSlice = PrismicSlice<
-  HeadingAndTextNonRepeatable,
+export type HeadingWithTextAndImageSlice = PrismicSlice<
+  HeadingWithTextAndImageNonRepeatable,
   null,
-  'headinge_and_text'
+  'heading_with_text_and_image'
 >;
 
-const HeadingAndText: React.FunctionComponent<HeadingAndTextNonRepeatable> = (
+const HeadingAndText: React.FunctionComponent<HeadingWithTextAndImageNonRepeatable> = (
   props
 ) => {
-  const { heading, text } = props;
+  const { heading, text, image1 } = props;
 
   if (!heading) {
     throw new Error('No heading');
@@ -40,6 +46,7 @@ const HeadingAndText: React.FunctionComponent<HeadingAndTextNonRepeatable> = (
     <>
       <Heading>{heading}</Heading>
       <Text>{RichText.render(text)}</Text>
+      {image1 && <Image src={image1.url} alt={image1.alt} />}
     </>
   );
 };

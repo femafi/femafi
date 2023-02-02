@@ -1,5 +1,4 @@
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
-import { findDOMNode } from 'react-dom';
 import { ResizeObserver } from '@juggle/resize-observer';
 
 const getRect = <T extends HTMLElement>(element?: T): DOMRect => {
