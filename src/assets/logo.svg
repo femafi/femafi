@@ -1,6 +1,15 @@
 <svg version="1.1" viewBox="0 0 88.955 25.425">
-  <path d="M0 5.105V.025h20.346v5.08H5.08v2.54h15.266v5.08H5.08v7.646H0v-7.646z" />
-  <path d="M27.976 15.265h15.24v5.08h-20.32V.025h20.32v5.08h-15.24v2.54h15.24v5.08h-15.24z" />
-  <path d="M50.82 5.08v15.265h-5.08V0h20.346v20.345H60.98V5.08h-2.54v15.265h-5.08V5.08z" />
-  <path d="M83.876 12.725h-10.16v7.62h-5.08V.025l5.08 5.08v2.54h10.16v-2.54h-10.16V.025h15.24v25.4l-5.08-5.08z" />
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgb(0,68,193);stop-opacity:1" />
+      <stop offset="50%" style="stop-color:rgb(130,163,217);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(0,68,193);stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <g fill="url(#gradient)" stroke="rgb(255,255,255)" stroke-width="0.2px" stroke-linejoin="round">
+    <path d="M0 5.105V.025h20.346v5.08H5.08v2.54h15.266v5.08H5.08v7.646H0v-7.646z" />
+    <path d="M27.976 15.265h15.24v5.08h-20.32V.025h20.32v5.08h-15.24v2.54h15.24v5.08h-15.24z" />
+    <path d="M50.82 5.08v15.265h-5.08V0h20.346v20.345H60.98V5.08h-2.54v15.265h-5.08V5.08z" />
+    <path d="M83.876 12.725h-10.16v7.62h-5.08V.025l5.08 5.08v2.54h10.16v-2.54h-10.16V.025h15.24v25.4l-5.08-5.08z" />
+  </g>
 </svg>

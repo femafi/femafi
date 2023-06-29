@@ -20,8 +20,8 @@ const theme: Theme = {
   colors: {
     text: '#ffffff',
     background: '#000000',
-    mainLight: '#00adef',
-    mainDark: '#0088b2',
+    mainLight: 'rgb(130,163,217)',
+    mainDark: 'rgb(0,68,193)',
     accentLight: '#a9a9a9',
     accentDark: '#595959',
     shadow: 'rgba(0,0,0,0.75)'

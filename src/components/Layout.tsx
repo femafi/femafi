@@ -53,23 +53,7 @@ const Center = styled.div`
 const StyledLogo = styled(Logo)<{ theme: Theme }>`
   display: inline-block;
   width: 240px;
-  fill: ${(props) => props.theme.colors.mainLight};
-  filter: drop-shadow(13px 0 ${(props) => props.theme.colors.accentDark});
-`;
-
-const swipeFromLeft = keyframes`
-  from { transform: translate(-100%); }
-  to { transform: translate(0); }
-`;
-
-const LinesWrapper = styled.div`
-  margin-top: -12px;
-  animation: ${swipeFromLeft} 0.7s ease-in 1;
-`;
-
-const Line = styled.div<{ color: string }>`
-  background-color: ${(props) => props.color};
-  height: 5px;
+  fill: linear-gradient(90deg, blue, red);
 `;
 
 const fadeIn = keyframes`
@@ -109,13 +93,8 @@ export const Layout: React.FunctionComponent<LayoutProps> = ({
       <Center>
         <StyledLogo />
       </Center>
-      <LinesWrapper>
-        <Line color={theme.colors.accentLight} />
-        <Line color={theme.colors.mainLight} />
-        <Line color={theme.colors.mainDark} />
-      </LinesWrapper>
       <Center>
-        <Title>Finnish Electronic Music Foundation</Title>
+        <Title>Finnish Electronic Music Association</Title>
       </Center>
       <ContentWrapper>{children}</ContentWrapper>
     </ThemeProvider>
